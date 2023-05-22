@@ -97,7 +97,7 @@ export default function Format() {
               { label: "Markdown", value: "md" },
             ]}
             selected={formatOptions().ext}
-            onChange={(item) => setExt(item.value as FormatExt)}
+            onChange={(item) => setFormatOption("ext", item.value as FormatExt)}
           />
           <CheckboxField
             name="use-tabs"
