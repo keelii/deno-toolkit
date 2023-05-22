@@ -1,5 +1,5 @@
 import { FormatOptions, Result } from "../interface.ts";
-import { createFromBuffer } from "npm:@dprint/formatter";
+import { createFromBuffer } from "https://esm.sh/@dprint/formatter@0.2.0/";
 
 const pathname = new URL(".", import.meta.url).pathname;
 const tsWasm = await Deno.readFile(pathname + "wasm/typescript-0.84.4.wasm");
