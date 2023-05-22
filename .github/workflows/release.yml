@@ -1,0 +1,49 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 当有以 'v' 开头的标签推送时触发
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Deno
+        # uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@9db7f66e8e16b5699a514448ce994936c63f0d54
+        with:
+          deno-version: v1.x
+
+      - name: Build
+        run: deno task build
+
+      - name: Zip
+        run: zip ./deno-toolkit.zip deno-toolkit
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.DENO_TOOLKIT_RELEASE_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release ${{ github.ref }} is created automatically.
+          draft: false
+          prerelease: false
+
+      - name: Upload Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.DENO_TOOLKIT_RELEASE_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./deno-toolkit.zip
+          asset_name: deno-toolkit.zip
+          asset_content_type: application/zip
