@@ -1,7 +1,7 @@
 {
   "tasks": {
     "dev": "DENO_PORT=4000 deno run -A --watch src/main.ts",
-    "build": "DENO_ENV=prd deno compile --unstable --output=deno-toolkit src/main.ts"
+    "build": "DENO_ENV=prd deno compile --unstable --output=deno-toolkit-linux src/main.ts"
   },
   "test": {
     "include": [

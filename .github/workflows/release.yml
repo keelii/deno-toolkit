@@ -23,7 +23,7 @@ jobs:
         run: deno task build
 
       - name: Zip
-        run: zip ./deno-toolkit.zip deno-toolkit
+        run: zip ./deno-toolkit-linux.zip deno-toolkit-linux
 
       - name: Create Release
         id: create_release
@@ -44,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DENO_TOOLKIT_RELEASE_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./deno-toolkit.zip
-          asset_name: deno-toolkit.zip
+          asset_path: ./deno-toolkit-linux.zip
+          asset_name: deno-toolkit-linux.zip
           asset_content_type: application/zip
