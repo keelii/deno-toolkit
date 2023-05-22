@@ -3,6 +3,11 @@
     "dev": "deno run -A --watch main.ts",
     "build": "DENO_ENV=prd deno compile main.ts"
   },
+  "test": {
+    "include": [
+      "src/main_test.ts"
+    ]
+  },
   "fmt": {
     "exclude": ["src/static/"]
   },
