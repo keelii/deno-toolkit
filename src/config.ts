@@ -1,3 +1,4 @@
+export const WASM_DIR = Deno.env.get("WASM_DIR") || "./src/api/wasm";
 export const PORT = Deno.env.has("DENO_PORT")
   ? Number(Deno.env.get("DENO_PORT"))
   : 4000;
