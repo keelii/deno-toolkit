@@ -31,7 +31,7 @@ export async function route(pathname: string, request: Request) {
       return ApiResponse.json(await handleHash(request));
     default:
       if (pathname.startsWith("/static")) {
-        return StaticFileResponse.serve(pathname.slice(1));
+        return StaticFileResponse.serve(pathname.slice(8));
       }
       return new NotFoundResponse();
   }

@@ -1,8 +1,8 @@
 import { FormatOptions, Result } from "../interface.ts";
 import { createFromBuffer } from "https://esm.sh/@dprint/formatter@0.2.0/";
-import { WASM_DIR } from "../config.ts";
+import {STATIC_DIR} from "../config.ts"
 
-const pathname = WASM_DIR || new URL("./wasm", import.meta.url).pathname;
+const pathname = new URL(STATIC_DIR + "/wasm", import.meta.url).pathname;
 const tsWasm = await Deno.readFile(pathname + "/typescript-0.84.4.wasm");
 const jsonWasm = await Deno.readFile(pathname + "/json-0.17.2.wasm");
 const mdWasm = await Deno.readFile(pathname + "/markdown-0.15.2.wasm");

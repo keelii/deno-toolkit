@@ -111,7 +111,7 @@ export default function Format() {
             name="use-semi"
             label="Use semi"
             onChange={(checked) => {
-              setFormatOptions("useSemi", checked);
+              setFormatOption("useSemi", checked);
               doFormat().catch(console.error);
             }}
           />
@@ -119,7 +119,7 @@ export default function Format() {
             name="single-quote"
             label="Single quote"
             onChange={(checked) => {
-              setFormatOptions("singleQuote", checked);
+              setFormatOption("singleQuote", checked);
               doFormat().catch(console.error);
             }}
           />
