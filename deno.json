@@ -18,6 +18,7 @@
       "exclude": ["no-control-regex", "no-explicit-any"]
     }
   },
+  "lock": false,
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
