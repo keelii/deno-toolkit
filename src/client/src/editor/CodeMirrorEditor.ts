@@ -201,7 +201,6 @@ export class CodeMirrorEditor extends EventEmitter {
   }
 
   setContent(text: string) {
-    console.log("text", text);
     this.view.dispatch({
       changes: { from: 0, to: this.view.state.doc.length, insert: text },
     });
