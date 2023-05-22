@@ -1,0 +1,21 @@
+{
+  "tasks": {
+    "dev": "deno run -A --watch main.ts",
+    "build": "DENO_ENV=prd deno compile main.ts"
+  },
+  "fmt": {
+    "exclude": ["src/static/"]
+  },
+  "lint": {
+    "include": ["src/"],
+    "exclude": ["src/client/", "src/static/"],
+    "rules": {
+      "exclude": ["no-control-regex", "no-explicit-any"]
+    }
+  },
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "lib": ["dom", "esnext", "deno.window"]
+  }
+}
