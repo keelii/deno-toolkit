@@ -12,6 +12,16 @@ const Layout = `<!DOCTYPE html>
     window.__SERVICE_URL__ = ${IS_DEV ? `"http://localhost:${PORT}/"` : `""`}
   </script>
   ${IS_DEV ? '' : '<link rel="stylesheet" href="static/index.css" />'}
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-96N6BQ6VCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-96N6BQ6VCP');
+  </script>
 </head>
 <body>
   <div id="root"></div>
