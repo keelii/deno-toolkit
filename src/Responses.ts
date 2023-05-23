@@ -1,7 +1,7 @@
 import { render } from "./views.ts";
 import { lookup } from "https://deno.land/x/media_types/mod.ts";
 import { resolve } from "https://deno.land/std@0.140.0/path/mod.ts";
-import {CORS_ALLOW_ORIGIN, IS_DEV, STATIC_DIR} from "./config.ts"
+import { CORS_ALLOW_ORIGIN, IS_DEV, STATIC_DIR } from "./config.ts";
 
 const BaseHeaders = IS_DEV
   ? {

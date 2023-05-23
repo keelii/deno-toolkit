@@ -14,7 +14,7 @@ export async function route(pathname: string, request: Request) {
     case "/favicon.ico":
       return StaticFileResponse.serve("favicon.ico");
     case "/":
-      return new HtmlResponse(IndexView, { title: "Index" });
+      return Response.redirect(request.url + "format");
     case "/format":
       return new HtmlResponse(IndexView, { title: "Format" });
     case "/diff":
