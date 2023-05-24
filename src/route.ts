@@ -21,6 +21,8 @@ export async function route(pathname: string, request: Request) {
       return new HtmlResponse(IndexView, { title: "Diff" });
     case "/hash":
       return new HtmlResponse(IndexView, { title: "Hash" });
+    case "/encoding":
+      return new HtmlResponse(IndexView, { title: "Encoding" });
     case "/design":
       return new HtmlResponse(IndexView, { title: "Design" });
     case "/api/format":
