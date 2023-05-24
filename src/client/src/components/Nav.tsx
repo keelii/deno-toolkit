@@ -7,6 +7,7 @@ const navs: NavType[] = [
   NavType.Format,
   NavType.Diff,
   NavType.Hash,
+  NavType.Codec,
 ];
 
 if (window.__IS_DEV__) {

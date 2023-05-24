@@ -29,6 +29,8 @@ const icons = {
           <path d="M14 10h.4a.6.6 0 01.6.6v2.8a.6.6 0 01-.6.6H9.6a.6.6 0 01-.6-.6v-2.8a.6.6 0 01.6-.6h.4m4 0V8c0-.667-.4-2-2-2s-2 1.333-2 2v2m4 0h-4" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           <path d="M6 17h14M6 21h14" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
           <path d="M6 21a2 2 0 110-4" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>`,
+  "codec":
+    `<path d="M17 20V4m0 0l3 3m-3-3l-3 3M7 4v16m0 0l3-3m-3 3l-3-3" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>`,
   "design":
     `<path d="M5.212 15.111l-2.687-2.687a.6.6 0 010-.848l2.687-2.687a.6.6 0 01.848 0l2.687 2.687a.6.6 0 010 .848L6.06 15.111a.6.6 0 01-.848 0zM11.576 21.475l-2.687-2.687a.6.6 0 010-.849l2.687-2.687a.6.6 0 01.848 0l2.687 2.687a.6.6 0 010 .849l-2.687 2.687a.6.6 0 01-.848 0zM11.576 8.748L8.889 6.06a.6.6 0 010-.848l2.687-2.687a.6.6 0 01.848 0l2.687 2.687a.6.6 0 010 .848l-2.687 2.688a.6.6 0 01-.848 0zM17.94 15.111l-2.687-2.687a.6.6 0 010-.848l2.687-2.687a.6.6 0 01.848 0l2.687 2.687a.6.6 0 010 .848l-2.687 2.687a.6.6 0 01-.848 0z" stroke="#000000" stroke-width="1.5"></path>`,
 };

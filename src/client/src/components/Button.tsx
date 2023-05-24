@@ -59,9 +59,10 @@ export const Button: ParentComponent<ButtonProps> = (props) => {
     roundedClass = "rounded-full";
   }
 
-  const buttonClass = `inline-flex items-center ${roundedClass} ${
-    types[type]
-  } ${sizes[+icon][size]} ${className}`;
+  const buttonClass =
+    `justify-center inline-flex items-center ${roundedClass} ${types[type]} ${
+      sizes[+icon][size]
+    } ${className}`;
 
   return (
     <button type="button" className={buttonClass} onClick={onClick}>

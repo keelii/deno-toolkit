@@ -3,4 +3,5 @@ export const enum NavType {
   Diff = "diff",
   Hash = "hash",
   Design = "design",
+  Codec = "codec",
 }
