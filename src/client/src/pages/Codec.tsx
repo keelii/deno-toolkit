@@ -3,6 +3,7 @@ import { Textarea } from "../components/Textarea.tsx";
 import { Layout } from "../components/Layout.tsx";
 import { createSignal } from "solid-js";
 import { SelectField } from "../components/SelectField.tsx";
+import {ButtonGroup} from "../components/ButtonGroup.tsx"
 
 enum CodecType {
   Base64 = "base64",
@@ -62,31 +63,32 @@ export default function Codec() {
 
   return (
     <Layout>
-      <div className="flex items-center gap-2 p-2">
+      <div className="flex flex-col items-center gap-2 p-2">
         <Textarea
           rows={10}
           value={input()}
           onInput={(e) => setInput(e.target.value)}
-          style={{ flex: 1 }}
+          className="flex-1"
         />
-        <div className="space-y-2 w-28 flex flex-col">
-          <SelectField
+        <div className="space-x-2">
+          <Button onClick={() => setOutput(process().encode())}>
+            Encode ↓
+          </Button>
+          <Button onClick={() => setOutput(process().decode())}>
+            Decode ↓
+          </Button>
+          <ButtonGroup
             value={type()}
             options={CodecTypes}
             onChange={setType}
           />
-          <Button onClick={() => setOutput(process().encode())}>
-            Encode →
-          </Button>
-          <Button onClick={() => setOutput(process().decode())}>
-            Decode →
-          </Button>
         </div>
         <Textarea
+          readonly
           rows={10}
           value={output()}
           onInput={(e) => setOutput(e.target.value)}
-          style={{ flex: 1 }}
+          className="flex-1"
         />
       </div>
     </Layout>

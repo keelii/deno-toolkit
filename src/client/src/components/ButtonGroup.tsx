@@ -24,7 +24,8 @@ const sizes: Record<BaseSize, string> = {
 
 export const ButtonGroup: ParentComponent<ButtonGroupProps> = (props) => {
   const { options, selected, size = "md", onChange = () => {} } = props;
-  const [selectedItem, setSelectedItem] = createSignal(selected);
+  const selectedValue = options.find((item) => item.selected)?.value || selected
+  const [selectedItem, setSelectedItem] = createSignal(selectedValue);
 
   const handleItemClick = (item: ButtonGroupOption) => {
     setSelectedItem(item.value);
@@ -43,14 +44,12 @@ export const ButtonGroup: ParentComponent<ButtonGroupProps> = (props) => {
     return className;
   };
 
-  // onCleanup(() => setSelectedItem(''));
-
   return (
     <span className="isolate inline-flex rounded-md shadow-sm" id="btn-group">
       {options.map((item) => (
         <button
           type="button"
-          class={`relative inline-flex items-center ${sizes[size]} ${
+          className={`relative inline-flex items-center ${sizes[size]} ${
             selectedItem() === item.value ? "bg-gray-200" : "bg-white"
           } ${
             getItemClass(item)
