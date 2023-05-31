@@ -24,7 +24,8 @@ const sizes: Record<BaseSize, string> = {
 
 export const ButtonGroup: ParentComponent<ButtonGroupProps> = (props) => {
   const { options, selected, size = "md", onChange = () => {} } = props;
-  const selectedValue = options.find((item) => item.selected)?.value || selected
+  const selectedValue = options.find((item) => item.selected)?.value ||
+    selected;
   const [selectedItem, setSelectedItem] = createSignal(selectedValue);
 
   const handleItemClick = (item: ButtonGroupOption) => {

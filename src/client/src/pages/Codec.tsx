@@ -2,8 +2,7 @@ import { Button } from "../components/Button.tsx";
 import { Textarea } from "../components/Textarea.tsx";
 import { Layout } from "../components/Layout.tsx";
 import { createSignal } from "solid-js";
-import { SelectField } from "../components/SelectField.tsx";
-import {ButtonGroup} from "../components/ButtonGroup.tsx"
+import { ButtonGroup } from "../components/ButtonGroup.tsx";
 
 enum CodecType {
   Base64 = "base64",
@@ -80,7 +79,9 @@ export default function Codec() {
           <ButtonGroup
             value={type()}
             options={CodecTypes}
-            onChange={setType}
+            onChange={(o) => {
+              setType(o.value);
+            }}
           />
         </div>
         <Textarea
