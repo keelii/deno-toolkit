@@ -25,6 +25,9 @@ jobs:
       - name: Zip
         run: zip ./deno-toolkit-linux.zip deno-toolkit-linux
 
+      - name: ZipAssets
+        run: zip -j ./static.zip src/static/**/*
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -38,7 +41,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Assets
+      - name: Upload Executable
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.DENO_TOOLKIT_RELEASE_TOKEN }}
@@ -46,4 +49,14 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./deno-toolkit-linux.zip
           asset_name: deno-toolkit-linux.zip
+          asset_content_type: application/zip
+
+      - name: Upload Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.DENO_TOOLKIT_RELEASE_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./static.zip
+          asset_name: static.zip
           asset_content_type: application/zip
