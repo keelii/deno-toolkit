@@ -26,7 +26,6 @@ export default function Editor(props: EditorProps) {
     const doc = local.doc;
     if (editor) {
       editor.setContent(doc);
-      console.log(local.editorLang)
       editor.setLanguage(local.editorLang);
     }
   });
