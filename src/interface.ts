@@ -13,7 +13,8 @@ export interface HashResult {
   sha512: [string, string];
   sha384: [string, string];
 }
-export type FormatExt = "ts" | "tsx" | "js" | "jsx" | "json" | "md";
+export type FormatExt = "ts" | "tsx" | "js" | "jsx" | "json" | "md" | "html";
+export type EditorLang = "javascript" | "json" | "html" | "md";
 export interface FormatOptions {
   useTabs: boolean;
   useSemi: boolean;

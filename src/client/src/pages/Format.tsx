@@ -1,4 +1,10 @@
-import { createSignal, lazy, onCleanup, onMount } from "solid-js";
+import {
+  createComputed,
+  createSignal,
+  lazy,
+  onCleanup,
+  onMount,
+} from "solid-js";
 import { ButtonGroup } from "../components/ButtonGroup.tsx";
 import { CheckboxField } from "../components/CheckboxField.tsx";
 import { Icon } from "../components/Icon.tsx";
@@ -9,6 +15,7 @@ import { Layout } from "../components/Layout.tsx";
 import { usePageTitle } from "../hooks/usePageTitle.ts";
 import { errorToast } from "../components/Toast.tsx";
 import { FormatExt, Result, StoredFormatOptions } from "../../../interface.ts";
+import { LanguageMap } from "../const.ts";
 
 const Editor = lazy(() => import("../components/Editor.tsx"));
 
@@ -17,9 +24,10 @@ const storedFormatOptions: StoredFormatOptions = Object.assign({
   useSemi: false,
   singleQuote: false,
   ext: "ts",
-}, localStorage.getItem("formatOptions") || {});
+}, JSON.parse(localStorage.getItem("formatOptions")) || {});
 
 export default function Format() {
+  const [editorLang, setEditorLang] = createSignal(storedFormatOptions.ext);
   const [formatOptions, setFormatOptions] = createSignal(storedFormatOptions);
   const [content, setContent] = createSignal(
     "var a ='1';\nif(true){\nconsole.log(1)\n}",
@@ -29,12 +37,17 @@ export default function Format() {
     key: keyof StoredFormatOptions,
     value: any,
   ) => {
-    setFormatOptions({ ...formatOptions(), [key]: value });
+    const options = formatOptions();
+    setFormatOptions({ ...options, [key]: value });
+    if (key === "ext") {
+      setEditorLang(LanguageMap[value]);
+    }
   };
 
   const doFormat = async () => {
+    const options = formatOptions();
     const response = await postFormat({
-      ...formatOptions(),
+      ...options,
       content: content(),
     });
     const result: Result<string> = await response.json();
@@ -43,7 +56,7 @@ export default function Format() {
     } else {
       setContent(result.data);
     }
-    localStorage.setItem("formatOptions", formatOptions());
+    localStorage.setItem("formatOptions", JSON.stringify(options));
   };
   const mainWidth = "calc(100vw - 12rem - 2px)";
   const mainHeight = "calc(100vh - 4rem)";
@@ -95,6 +108,7 @@ export default function Format() {
               { label: "TypeScript", value: "ts" },
               { label: "JSON", value: "json" },
               { label: "Markdown", value: "md" },
+              { label: "HTML", value: "html" },
             ]}
             selected={formatOptions().ext}
             onChange={(item) => setFormatOption("ext", item.value as FormatExt)}
@@ -133,7 +147,13 @@ export default function Format() {
         <Editor
           name="format"
           doc={content()}
-          onChange={(value) => inputBuff = value}
+          editorLang={editorLang()}
+          onChange={(value) => {
+            inputBuff = value;
+            if (value === "") {
+              setContent(value);
+            }
+          }}
         />
       </div>
     </Layout>

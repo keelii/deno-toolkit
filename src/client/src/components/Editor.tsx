@@ -3,10 +3,12 @@ import {
   CodeMirrorEditor,
   CodeMirrorEditorOptions,
 } from "../editor/CodeMirrorEditor.ts";
+import { EditorLang } from "../../../interface.ts";
 
-interface EditorProps extends CodeMirrorEditorOptions {
+interface EditorProps extends Partial<CodeMirrorEditorOptions> {
   name: string;
   className?: string;
+  editorLang?: EditorLang;
   onChange: (value: string) => void;
 }
 export default function Editor(props: EditorProps) {
@@ -14,6 +16,7 @@ export default function Editor(props: EditorProps) {
     "name",
     "doc",
     "className",
+    "editorLang",
     "onChange",
   ]);
   const id = `cm-editor-${local.name}`;
@@ -23,6 +26,7 @@ export default function Editor(props: EditorProps) {
     const doc = local.doc;
     if (editor) {
       editor.setContent(doc);
+      editor.setLanguage(local.editorLang);
     }
   });
 
@@ -36,8 +40,5 @@ export default function Editor(props: EditorProps) {
     });
   });
 
-  return (
-    <div id={id} className={`h-full ${local.className || ""}`}>
-    </div>
-  );
+  return <div id={id} className={`h-full ${local.className || ""}`} />;
 }

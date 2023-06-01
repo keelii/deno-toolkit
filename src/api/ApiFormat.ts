@@ -1,6 +1,7 @@
 import { FormatOptions, Result } from "../interface.ts";
 import { createFromBuffer } from "https://esm.sh/@dprint/formatter@0.2.0/";
 import { STATIC_DIR } from "../config.ts";
+import formatHtml from "https://esm.sh/html-format@1.1.2/";
 
 const pathname = new URL(STATIC_DIR, import.meta.url).pathname;
 const tsWasm = await Deno.readFile(pathname + "/typescript-0.84.4.wasm");
@@ -30,6 +31,11 @@ function format(options: FormatOptions) {
       return formatJson.formatText(filename, options.content);
     case "md":
       return formatMd.formatText(filename, options.content);
+    case "html":
+      return formatHtml(
+        options.content,
+        options.useTabs ? "\t" : " ".repeat(2),
+      );
   }
 }
 

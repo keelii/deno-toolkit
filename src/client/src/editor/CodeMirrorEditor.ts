@@ -2,6 +2,8 @@ import { EventEmitter } from "./EventEmmiter";
 import { Compartment, EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
 import { json } from "@codemirror/lang-json";
+import { html } from "@codemirror/lang-html";
+import { markdown } from "@codemirror/lang-markdown";
 import {
   bracketMatching,
   defaultHighlightStyle,
@@ -37,6 +39,7 @@ import {
 } from "@codemirror/commands";
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import { lintKeymap } from "@codemirror/lint";
+import { EditorLang } from "../../../interface.ts";
 
 const language = new Compartment();
 const tabSize = new Compartment();
@@ -48,7 +51,7 @@ export interface CodeMirrorEditorOptions {
   lineNumbers: boolean;
   lineWrap: boolean;
   foldGutter: boolean;
-  language: "javascript" | "json";
+  language: EditorLang;
 }
 
 const Defaults: CodeMirrorEditorOptions = {
@@ -64,6 +67,7 @@ export class CodeMirrorEditor extends EventEmitter {
   private lineWrap: boolean;
   private state: EditorState;
   private view: EditorView;
+  private id: string;
 
   constructor(
     id: string,
@@ -128,11 +132,16 @@ export class CodeMirrorEditor extends EventEmitter {
       exts.push(foldGutter());
     }
 
-    if (this.options.language === "json") {
-      exts.push(language.of(json()));
-    }
-    if (this.options.language === "javascript") {
-      exts.push(language.of(javascript()));
+    switch (this.options.language) {
+      case "javascript":
+        exts.push(language.of(javascript()));
+        break;
+      case "json":
+        exts.push(language.of(json()));
+        break;
+      case "html":
+        exts.push(language.of(html()));
+        break;
     }
 
     exts.push(
@@ -168,10 +177,23 @@ export class CodeMirrorEditor extends EventEmitter {
     return exts;
   }
 
-  setLanguage(lang: "javascript" | "json") {
-    this.view.dispatch({
-      effects: language.reconfigure(lang === "json" ? json() : javascript()),
-    });
+  setLanguage(lang: EditorLang) {
+    let effects;
+    switch (lang) {
+      case "javascript":
+        effects = language.reconfigure(javascript());
+        break;
+      case "json":
+        effects = language.reconfigure(json());
+        break;
+      case "html":
+        effects = language.reconfigure(html());
+        break;
+      case "md":
+        effects = language.reconfigure(markdown());
+    }
+
+    this.view.dispatch({ effects });
   }
   setIndentConfig(size: number, isTab = false) {
     this.view.dispatch({
