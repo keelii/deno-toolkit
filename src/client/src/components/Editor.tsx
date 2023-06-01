@@ -26,6 +26,7 @@ export default function Editor(props: EditorProps) {
     const doc = local.doc;
     if (editor) {
       editor.setContent(doc);
+      console.log(local.editorLang)
       editor.setLanguage(local.editorLang);
     }
   });
@@ -33,6 +34,7 @@ export default function Editor(props: EditorProps) {
   onMount(() => {
     editor = new CodeMirrorEditor(id, {
       doc: local.doc,
+      language: local.editorLang,
       ...rest,
     });
     editor.on("change", (value) => {

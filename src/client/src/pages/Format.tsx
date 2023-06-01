@@ -82,7 +82,7 @@ export default function Format() {
 
   return (
     <Layout>
-      <div className="border-y h-16 flex">
+      <div className="border-b h-16 flex">
         <div className="p-2 flex items-center gap-4">
           <Button
             size="sm"
