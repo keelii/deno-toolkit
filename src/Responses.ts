@@ -1,7 +1,7 @@
-import { render } from "./views.ts";
+import { Layout, render } from "./views.ts";
 import { lookup } from "https://deno.land/x/media_types/mod.ts";
 import { resolve } from "https://deno.land/std@0.140.0/path/mod.ts";
-import { CORS_ALLOW_ORIGIN, IS_DEV, STATIC_DIR } from "./config.ts";
+import { CORS_ALLOW_ORIGIN, IS_DEV, STATIC_DIR } from "./config/server.ts";
 
 const BaseHeaders = IS_DEV
   ? {
@@ -30,9 +30,10 @@ export class ApiResponse extends Response {
     });
   }
 }
+
 export class HtmlResponse extends Response {
   constructor(html: string, data: Record<string, any>, init?: ResponseInit) {
-    super(render(html, data), {
+    super(render(html, data, Layout), {
       headers: { "content-type": "text/html; charset=UTF-8" },
       ...init,
     });

@@ -142,6 +142,17 @@ export class CodeMirrorEditor extends EventEmitter {
       case "html":
         exts.push(language.of(html()));
         break;
+      case "jsx":
+        exts.push(language.of(javascript({
+          jsx: true,
+        })));
+        break;
+      case "tsx":
+        exts.push(language.of(javascript({
+          jsx: true,
+          typescript: true,
+        })));
+        break;
     }
 
     exts.push(
