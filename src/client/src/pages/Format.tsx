@@ -15,16 +15,15 @@ import { Layout } from "../components/Layout.tsx";
 import { usePageTitle } from "../hooks/usePageTitle.ts";
 import { errorToast } from "../components/Toast.tsx";
 import { FormatExt, Result, StoredFormatOptions } from "../../../interface.ts";
-import { LanguageMap } from "../const.ts";
+import { DefaultFormatOptions, LanguageMap } from "../const.ts";
 
 const Editor = lazy(() => import("../components/Editor.tsx"));
 
-const storedFormatOptions: StoredFormatOptions = Object.assign({
-  useTabs: false,
-  useSemi: false,
-  singleQuote: false,
-  ext: "ts",
-}, JSON.parse(localStorage.getItem("formatOptions")) || {});
+const storedFormatOptions: StoredFormatOptions = Object.assign(
+  {},
+  DefaultFormatOptions,
+  JSON.parse(localStorage.getItem("formatOptions")) || {},
+);
 
 export default function Format() {
   const [editorLang, setEditorLang] = createSignal(storedFormatOptions.ext);

@@ -14,7 +14,7 @@ export interface HashResult {
   sha384: [string, string];
 }
 export type FormatExt = "ts" | "tsx" | "js" | "jsx" | "json" | "md" | "html";
-export type EditorLang = "javascript" | "json" | "html" | "md";
+export type EditorLang = "javascript" | "jsx" | "tsx" | "json" | "html" | "md";
 export interface FormatOptions {
   useTabs: boolean;
   useSemi: boolean;
@@ -28,4 +28,7 @@ export interface DifferOptions {
   left: string;
   right: string;
   type: DiffType;
+}
+export interface BuildOptions {
+  code: string;
 }

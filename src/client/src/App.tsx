@@ -4,6 +4,7 @@ import Diff from "./pages/Diff.tsx";
 import Hash from "./pages/Hash.tsx";
 import Design from "./pages/Design.tsx";
 import Codec from "./pages/Codec.tsx";
+import Playground from "./pages/Playground.tsx";
 import { NavType } from "./const.ts";
 
 export function App() {
@@ -14,6 +15,7 @@ export function App() {
     { path: "/" + NavType.Hash, component: Hash },
     { path: "/" + NavType.Design, component: Design },
     { path: "/" + NavType.Codec, component: Codec },
+    { path: "/" + NavType.Playground, component: Playground },
   ]);
 
   return <Routes />;

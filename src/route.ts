@@ -4,10 +4,11 @@ import {
   NotFoundResponse,
   StaticFileResponse,
 } from "./Responses.ts";
-import { IndexView } from "./views.ts";
+import { IndexView, PlaygroundView } from "./views.ts";
 import { handleFormat } from "./api/ApiFormat.ts";
 import { handleDiff } from "./api/ApiDiff.ts";
 import { handleHash } from "./api/ApiHash.ts";
+import { handleBuild } from "./api/ApiBuild.ts";
 
 export async function route(pathname: string, request: Request) {
   switch (pathname) {
@@ -25,12 +26,16 @@ export async function route(pathname: string, request: Request) {
       return new HtmlResponse(IndexView, { title: "Codec" });
     case "/design":
       return new HtmlResponse(IndexView, { title: "Design" });
+    case "/playground":
+      return new HtmlResponse(PlaygroundView, { title: "Playground" });
     case "/api/format":
       return ApiResponse.json(await handleFormat(request));
     case "/api/diff":
       return ApiResponse.json(await handleDiff(request));
     case "/api/hash":
       return ApiResponse.json(await handleHash(request));
+    case "/api/build":
+      return ApiResponse.json(await handleBuild(request));
     default:
       if (pathname.startsWith("/static")) {
         return StaticFileResponse.serve(pathname.slice(8));

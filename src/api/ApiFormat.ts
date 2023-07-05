@@ -1,12 +1,12 @@
 import { FormatOptions, Result } from "../interface.ts";
 import { createFromBuffer } from "https://esm.sh/@dprint/formatter@0.2.0/";
-import { STATIC_DIR } from "../config.ts";
+import { STATIC_DIR } from "../config/server.ts";
 import formatHtml from "https://esm.sh/html-format@1.1.2/";
 
 const pathname = new URL(STATIC_DIR, import.meta.url).pathname;
-const tsWasm = await Deno.readFile(pathname + "/typescript-0.84.4.wasm");
-const jsonWasm = await Deno.readFile(pathname + "/json-0.17.2.wasm");
-const mdWasm = await Deno.readFile(pathname + "/markdown-0.15.2.wasm");
+const tsWasm = await Deno.readFile(pathname + "/wasm/typescript-0.84.4.wasm");
+const jsonWasm = await Deno.readFile(pathname + "/wasm/json-0.17.2.wasm");
+const mdWasm = await Deno.readFile(pathname + "/wasm/markdown-0.15.2.wasm");
 
 const formatTs = createFromBuffer(tsWasm);
 const formatJson = createFromBuffer(jsonWasm);
