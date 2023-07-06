@@ -1,4 +1,4 @@
-import { DifferOptions, FormatOptions } from "../../interface.ts";
+import { BuildOptions, DifferOptions, FormatOptions } from "../../interface.ts";
 
 export const SERVICE_URL = window.__SERVICE_URL__;
 
@@ -25,4 +25,10 @@ export const postHash = async (msg: string | FormData, url: string = "") => {
       method: "POST",
       body: msg,
     });
+};
+export const postBuild = async (options: BuildOptions) => {
+  return fetch(SERVICE_URL + "api/build", {
+    method: "POST",
+    body: JSON.stringify(options),
+  });
 };

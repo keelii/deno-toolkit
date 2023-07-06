@@ -10,6 +10,7 @@ interface EditorProps extends Partial<CodeMirrorEditorOptions> {
   className?: string;
   editorLang?: EditorLang;
   onChange: (value: string) => void;
+  onLoad: (value: string) => void;
 }
 export default function Editor(props: EditorProps) {
   const [local, rest] = splitProps(props, [
@@ -18,6 +19,7 @@ export default function Editor(props: EditorProps) {
     "className",
     "editorLang",
     "onChange",
+    "onLoad",
   ]);
   const id = `cm-editor-${local.name}`;
   let editor: CodeMirrorEditor;
@@ -39,6 +41,9 @@ export default function Editor(props: EditorProps) {
     editor.on("change", (value) => {
       local.onChange(value);
     });
+    if (typeof local.onLoad === "function") {
+      local.onLoad(editor.state.doc.toString());
+    }
   });
 
   return <div id={id} className={`h-full ${local.className || ""}`} />;
