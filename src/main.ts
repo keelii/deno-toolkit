@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.184.0/http/server.ts";
-import { ENV, PORT, STATIC_DIR } from "./config/server.ts";
+import { ENV, ESBUILD_BINARY, PORT, STATIC_DIR } from "./config/server.ts";
 import { route } from "./route.ts";
 
 const handler = async (request: Request): Promise<Response> => {
@@ -11,6 +11,7 @@ const handler = async (request: Request): Promise<Response> => {
 console.log(`----- Server is running on port ${PORT} -----`);
 console.log("- ENV:", ENV);
 console.log("- STATIC_DIR:", STATIC_DIR);
+console.log("- ESBUILD_BINARY: ", ESBUILD_BINARY);
 console.log(`------------------------------------------`);
 
 await serve(handler, { port: PORT });

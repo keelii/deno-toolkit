@@ -66,8 +66,8 @@ export const HashView = `
 export const PlaygroundView = `
   <script src="${STATIC_URL_PREFIX}index.${ext}" type="module"></script>
   
-  <script src="//unpkg.jd.com/react@18.2.0/umd/react.development.js"></script>
-  <script src="//unpkg.jd.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="//storage.360buyimg.com/dest/react.production.min.js"></script>
+  <script src="//storage.360buyimg.com/dest/react-dom.production.min.js"></script>
 `;
 export const IframeView = `
 `;
