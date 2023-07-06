@@ -52,6 +52,7 @@ export interface CodeMirrorEditorOptions {
   lineWrap: boolean;
   foldGutter: boolean;
   language: EditorLang;
+  tabSize: number;
 }
 
 const Defaults: CodeMirrorEditorOptions = {
@@ -60,6 +61,7 @@ const Defaults: CodeMirrorEditorOptions = {
   lineWrap: true,
   foldGutter: true,
   language: "javascript",
+  tabSize: 4,
 };
 
 export class CodeMirrorEditor extends EventEmitter {
@@ -85,7 +87,7 @@ export class CodeMirrorEditor extends EventEmitter {
       doc: store || this.options.doc,
       extensions: [
         ...this.builtinExtensions,
-        tabSize.of(EditorState.tabSize.of(4)),
+        tabSize.of(EditorState.tabSize.of(options.tabSize)),
         indent.of(indentUnit.of("\t")),
         this.updateListener,
       ],

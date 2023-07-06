@@ -1,36 +1,41 @@
-import * as esbuild from "https://deno.land/x/esbuild@v0.18.11/wasm.js";
-import { STATIC_DIR } from "../config/server.ts";
+import { ESBUILD_BINARY } from "../config/server.ts";
 import { BuildOptions, Result } from "../interface.ts";
 
-const pathname = new URL(STATIC_DIR, import.meta.url).pathname;
-const esbuildWasm = await Deno.readFile(pathname + "/wasm/esbuild.wasm");
-const wasmModule = new WebAssembly.Module(esbuildWasm);
-
-await esbuild.initialize({
-  wasmModule: wasmModule,
-});
-
-export async function build(code: string) {
-  const result = await esbuild.transform(code, {
-    sourcemap: "inline",
-    loader: "tsx",
-    format: "iife",
+export async function build(code: string): Promise<Result<string>> {
+  const command = new Deno.Command(ESBUILD_BINARY, {
+    args: [
+      "--sourcemap=inline",
+      "--loader=tsx",
+      "--format=iife",
+    ],
+    stdin: "piped",
+    stdout: "piped",
+    stderr: "piped",
   });
-  // console.log("result:", result);
-  // esbuild.stop();
+  const child = command.spawn();
+
+  const writer = child.stdin.getWriter();
+  await writer.write(
+    new TextEncoder().encode(code),
+  );
+  await writer.releaseLock();
+  await child.stdin.close();
+
+  const ret = await child.output();
+
+  const result = {
+    data: "",
+    error: "",
+  };
+
+  if (ret.stdout.length > 0) {
+    result.data = new TextDecoder().decode(ret.stdout);
+  } else if (ret.stderr.length > 0) {
+    result.error = new TextDecoder().decode(ret.stderr);
+  }
+
   return result;
 }
-
-// export async function decompressBuild(str: string) {
-//   const code = LZUTF8.decompress(LZUTF8.decodeBase64(str));
-//   const codeSample = `
-//     ${code}
-//     ReactDOM.createRoot(document.getElementById("root")).render(<App />)
-//   `;
-//
-//   const ret = await build(codeSample);
-//   return ret.code;
-// }
 
 export async function handleBuild(request: Request): Promise<Result<string>> {
   const result = {
@@ -46,12 +51,7 @@ export async function handleBuild(request: Request): Promise<Result<string>> {
       window._REACT_ROOT_.render(<App />)
     `;
     const ret = await build(codeSample);
-    if (ret.code) {
-      result.data = ret.code;
-    }
-    if (ret.warnings) {
-      console.warn(ret.warnings);
-    }
+    Object.assign(result, ret);
   } catch (e) {
     result.error = e.message;
   }

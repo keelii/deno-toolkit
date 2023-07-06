@@ -78,6 +78,7 @@ export default function Playground() {
       <div className="flex h-screen">
         <div className="w-1/2 relative">
           <Editor
+            tabSize={2}
             editorLang={"tsx"}
             name={"playground"}
             doc={code()}
