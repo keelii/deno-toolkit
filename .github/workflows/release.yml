@@ -26,7 +26,7 @@ jobs:
         run: zip ./deno-toolkit-linux.zip deno-toolkit-linux
 
       - name: ZipAssets
-        run: zip -rj ./static.zip src/static/
+        run: zip -r ./static.zip src/static/
 
       - name: Create Release
         id: create_release
