@@ -1,5 +1,6 @@
 export const STATIC_DIR = Deno.env.get("STATIC_DIR") || "../static";
-export const ESBUILD_BINARY = Deno.env.get("ESBUILD_BINARY") || "../static";
+export const ESBUILD_BINARY = Deno.env.get("ESBUILD_BINARY") ||
+  "/usr/local/bin/esbuild";
 export const PORT = Deno.env.has("DENO_PORT")
   ? Number(Deno.env.get("DENO_PORT"))
   : 4000;
