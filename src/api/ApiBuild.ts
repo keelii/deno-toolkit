@@ -1,7 +1,6 @@
 import * as esbuild from "https://deno.land/x/esbuild@v0.18.11/wasm.js";
 import { STATIC_DIR } from "../config/server.ts";
 import { BuildOptions, Result } from "../interface.ts";
-import { errorToast } from "../client/src/components/Toast.tsx";
 
 const pathname = new URL(STATIC_DIR, import.meta.url).pathname;
 const esbuildWasm = await Deno.readFile(pathname + "/wasm/esbuild.wasm");
@@ -51,7 +50,7 @@ export async function handleBuild(request: Request): Promise<Result<string>> {
       result.data = ret.code;
     }
     if (ret.warnings) {
-      errorToast(ret.warnings.map((w: any) => w.text).join("\n"));
+      console.warn(ret.warnings);
     }
   } catch (e) {
     result.error = e.message;
