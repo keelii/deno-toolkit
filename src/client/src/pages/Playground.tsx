@@ -1,4 +1,5 @@
 import { createSignal, onMount } from "solid-js";
+import Split from "split.js";
 import { Layout } from "../components/Layout.tsx";
 import Editor from "../components/Editor.tsx";
 import { debounce } from "../../utils.ts";
@@ -71,12 +72,22 @@ export default function Playground() {
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(IframeLayout);
     iframe.contentWindow.document.close();
+
+    Split(["#one", "#two"], {
+      sizes: [50, 50],
+      gutterSize: 6,
+      gutter(index, direction) {
+        const gutter = document.createElement("div");
+        gutter.className = `cursor-col-resize bg-gray-200 gutter gutter-${direction}`;
+        return gutter;
+      },
+    });
   });
 
   return (
     <Layout>
       <div className="flex h-screen">
-        <div className="w-1/2 relative">
+        <div id="one" className="w-1/2 relative">
           <Editor
             tabSize={2}
             editorLang={"tsx"}
@@ -96,8 +107,7 @@ export default function Playground() {
             <Icon name="code-bracket" />
           </Button>
         </div>
-        <div className="border-x-2"></div>
-        <div className="w-1/2">
+        <div id="two" className="w-1/2">
           <iframe
             ref={iframe}
             src="about:blank"
