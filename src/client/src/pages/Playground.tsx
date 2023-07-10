@@ -15,6 +15,16 @@ export function App() {
   return <div>App Hello</div>
 }`;
 
+function copyToClipboard(text) {
+  let tempInput = document.createElement('input');
+  tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+}
+
 export default function Playground() {
   const [code, setCode] = createSignal(CODE_TEMPLATE);
 
@@ -78,7 +88,8 @@ export default function Playground() {
       gutterSize: 6,
       gutter(index, direction) {
         const gutter = document.createElement("div");
-        gutter.className = `cursor-col-resize bg-gray-200 gutter gutter-${direction}`;
+        gutter.className =
+          `cursor-col-resize bg-gray-200 gutter gutter-${direction}`;
         return gutter;
       },
     });
@@ -105,6 +116,24 @@ export default function Playground() {
             }}
           >
             <Icon name="code-bracket" />
+          </Button>
+          <Button
+            type="secondary"
+            size="xs"
+            className="absolute top-1 right-12 opacity-70 z-10"
+            onClick={() => {
+              const url = window.__SERVICE_URL__ + "preview?code=" +
+                encodeURIComponent(compressText(inputBuffer));
+              const yes = window.prompt(
+                "按确认将复制下面的 URL 并在新页面打开：",
+                url,
+              );
+              if (yes) {
+                window.open(url)
+              }
+            }}
+          >
+            <Icon name="share" />
           </Button>
         </div>
         <div id="two" className="w-1/2">

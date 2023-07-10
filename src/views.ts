@@ -1,6 +1,28 @@
 import { IS_DEV, PORT } from "./config/server.ts";
 import { CHARSET, HTML_LANG } from "./config/client.ts";
 
+export const REACT = `
+  <script src="//storage.360buyimg.com/dest/react.production.min.js"></script>
+  <script src="//storage.360buyimg.com/dest/react-dom.production.min.js"></script>`;
+
+export const LZUTF8 = `
+  <script src="//storage.360buyimg.com/dest/lzutf8.min.js"></script>
+  <script>
+    function compressText(str) { return LZUTF8.compress(str, {outputEncoding: "Base64"}) }
+    function decompressText(str) { return LZUTF8.decompress(str, {inputEncoding: "Base64"}) }
+  </script>`;
+
+const GA_TAG = `
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-96N6BQ6VCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-96N6BQ6VCP');
+  </script>`;
+
 // deno-fmt-ignore
 export const Layout = `<!DOCTYPE html>
 <html lang="${HTML_LANG}">
@@ -15,15 +37,7 @@ export const Layout = `<!DOCTYPE html>
   ${IS_DEV ? '' : '<link rel="stylesheet" href="static/index.css" />'}
   {{headScript}}
   
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-96N6BQ6VCP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-96N6BQ6VCP');
-  </script>
+  ${GA_TAG}
 </head>
 <body>
   <div id="root"></div>
@@ -33,14 +47,21 @@ export const Layout = `<!DOCTYPE html>
 </body> 
 </html>`;
 
-// export const LZUTF8 = `
-//   <script src="//unpkg.com/lzutf8@0.6.3/build/production/lzutf8.min.js"></script>
-//   <script>
-//     function encodeBase64(str) { return LZUTF8.encodeBase64(str) }
-//     function decodeBase64(str) { return LZUTF8.decodeBase64(str) }
-//     function compressText(str) { return encodeBase64(LZUTF8.compress(str, { outputEncoding: "ByteArray" })) }
-//     function decompressText(str) { return LZUTF8.decompress(LZUTF8.decodeBase64(str)) }
-//   </script>`;
+export const PreviewLayout = `<!DOCTYPE html>
+<html lang="${HTML_LANG}">
+<head>
+  <meta charset="${CHARSET}">
+  <title>{{title}}</title>
+  
+  ${GA_TAG}
+</head>
+<body>
+  <div id="root"></div>
+  
+  <% yield %>
+
+</body> 
+</html>`;
 
 const DefaultData = {
   title: "",
@@ -66,8 +87,13 @@ export const HashView = `
 export const PlaygroundView = `
   <script src="${STATIC_URL_PREFIX}index.${ext}" type="module"></script>
   
-  <script src="//storage.360buyimg.com/dest/react.production.min.js"></script>
-  <script src="//storage.360buyimg.com/dest/react-dom.production.min.js"></script>
+  ${LZUTF8}
+
+  ${REACT}
+`;
+export const PreviewView = `
+  ${REACT}
+  <script>{{code}}</script>
 `;
 export const IframeView = `
 `;

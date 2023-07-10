@@ -2,15 +2,18 @@ import {
   ApiResponse,
   HtmlResponse,
   NotFoundResponse,
+  PreviewResponse,
   StaticFileResponse,
 } from "./Responses.ts";
-import { IndexView, PlaygroundView } from "./views.ts";
+import { IndexView, PlaygroundView, PreviewView } from "./views.ts";
 import { handleFormat } from "./api/ApiFormat.ts";
 import { handleDiff } from "./api/ApiDiff.ts";
 import { handleHash } from "./api/ApiHash.ts";
-import { handleBuild } from "./api/ApiBuild.ts";
+import { buildForPreview, handleBuild } from "./api/ApiBuild.ts";
 
 export async function route(pathname: string, request: Request) {
+  const url = new URL(request.url);
+
   switch (pathname) {
     case "/favicon.ico":
       return StaticFileResponse.serve("favicon.ico");
@@ -26,8 +29,13 @@ export async function route(pathname: string, request: Request) {
       return new HtmlResponse(IndexView, { title: "Codec" });
     case "/design":
       return new HtmlResponse(IndexView, { title: "Design" });
+    case "/preview":
+      return new PreviewResponse(PreviewView, {
+        title: "Preview",
+        code: await buildForPreview(url.searchParams.get("code") || ""),
+      });
     case "/playground":
-      return new HtmlResponse(PlaygroundView, { title: "Playground" });
+      return new HtmlResponse(PlaygroundView, {});
     case "/api/format":
       return ApiResponse.json(await handleFormat(request));
     case "/api/diff":
