@@ -35,7 +35,9 @@ export async function route(pathname: string, request: Request) {
         code: await buildForPreview(url.searchParams.get("code") || ""),
       });
     case "/playground":
-      return new HtmlResponse(PlaygroundView, {});
+      return new HtmlResponse(PlaygroundView, {
+        title: "Preview",
+      });
     case "/api/format":
       return ApiResponse.json(await handleFormat(request));
     case "/api/diff":
