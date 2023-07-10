@@ -36,7 +36,7 @@ export async function route(pathname: string, request: Request) {
       });
     case "/playground":
       return new HtmlResponse(PlaygroundView, {
-        title: "Preview",
+        title: "Playground",
       });
     case "/api/format":
       return ApiResponse.json(await handleFormat(request));
