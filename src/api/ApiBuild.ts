@@ -2,9 +2,6 @@ import { ESBUILD_BINARY } from "../config/server.ts";
 import { BuildOptions, Result } from "../interface.ts";
 import LZUTF8 from "https://esm.sh/lzutf8@0.6.3/";
 
-function compressText(str: string) {
-  return LZUTF8.compress(str, { outputEncoding: "Base64" });
-}
 function decompressText(str: string) {
   return LZUTF8.decompress(str, { inputEncoding: "Base64" });
 }
@@ -19,7 +16,7 @@ function addReactCodeRuntime(code: string) {
 
 export async function build(
   code: string,
-  isPro: boolean = false,
+  isPro = false,
 ): Promise<Result<string>> {
   const args = [
     "--loader=tsx",
