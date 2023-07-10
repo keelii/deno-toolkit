@@ -9,6 +9,6 @@ declare module "solid-js" {
 }
 
 interface Window {
-  __SERVICE_URL__: string;
+  __SITE_ROOT__: string;
   __IS_DEV__: boolean;
 }

@@ -122,7 +122,7 @@ export default function Playground() {
             size="xs"
             className="absolute top-1 right-12 opacity-70 z-10"
             onClick={() => {
-              const url = window.__SERVICE_URL__ + "preview?code=" +
+              const url = window.__SITE_ROOT__ + "preview?code=" +
                 encodeURIComponent(compressText(inputBuffer));
               const yes = window.prompt(
                 "按确认将复制下面的 URL 并在新页面打开：",

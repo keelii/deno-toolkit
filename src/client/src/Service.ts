@@ -1,6 +1,6 @@
 import { BuildOptions, DifferOptions, FormatOptions } from "../../interface.ts";
 
-export const SERVICE_URL = window.__SERVICE_URL__;
+export const SERVICE_URL = window.__SITE_ROOT__;
 
 export const postFormat = async (options: FormatOptions) => {
   return fetch(SERVICE_URL + "api/format", {
