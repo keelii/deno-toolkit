@@ -1,4 +1,4 @@
-import { IS_DEV, PORT } from "./config/server.ts";
+import { IS_DEV, PORT, SITE_ROOT } from "./config/server.ts";
 import { CHARSET, HTML_LANG } from "./config/client.ts";
 
 export const REACT = `
@@ -32,7 +32,7 @@ export const Layout = `<!DOCTYPE html>
   <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
   <script>
     window.__IS_DEV__ = ${IS_DEV}
-    window.__SERVICE_URL__ = ${IS_DEV ? `"http://localhost:${PORT}/"` : `""`}
+    window.__SERVICE_URL__ = ${`"${SITE_ROOT}"`}
   </script>
   ${IS_DEV ? '' : '<link rel="stylesheet" href="static/index.css" />'}
   {{headScript}}

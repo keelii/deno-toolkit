@@ -4,6 +4,7 @@ export const ESBUILD_BINARY = Deno.env.get("ESBUILD_BINARY") ||
 export const PORT = Deno.env.has("DENO_PORT")
   ? Number(Deno.env.get("DENO_PORT"))
   : 4000;
+export const SITE_ROOT = Deno.env.get("SITE_ROOT") || "http://localhost:4000/";
 export const ENV = Deno.env.get("DENO_ENV") || "prd";
 export const IS_DEV = ENV === "dev";
 export const CORS_ALLOW_ORIGIN = "*";
