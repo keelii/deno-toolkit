@@ -5,6 +5,7 @@ import Hash from "./pages/Hash.tsx";
 import Design from "./pages/Design.tsx";
 import Codec from "./pages/Codec.tsx";
 import Playground from "./pages/Playground.tsx";
+import Compress from "./pages/Compress.tsx"
 import { NavType } from "./const.ts";
 
 export function App() {
@@ -15,6 +16,7 @@ export function App() {
     { path: "/" + NavType.Hash, component: Hash },
     { path: "/" + NavType.Design, component: Design },
     { path: "/" + NavType.Codec, component: Codec },
+    { path: "/" + NavType.Compress, component: Compress },
     { path: "/" + NavType.Playground, component: Playground },
   ]);
 

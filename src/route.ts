@@ -5,15 +5,19 @@ import {
   PreviewResponse,
   StaticFileResponse,
 } from "./Responses.ts";
-import { IndexView, PlaygroundView, PreviewView } from "./views.ts";
+import {
+  CompressView,
+  IndexView,
+  PlaygroundView,
+  PreviewView,
+} from "./views.ts";
 import { handleFormat } from "./api/ApiFormat.ts";
 import { handleDiff } from "./api/ApiDiff.ts";
 import { handleHash } from "./api/ApiHash.ts";
 import { buildForPreview, handleBuild } from "./api/ApiBuild.ts";
 
-export async function route(pathname: string, request: Request) {
-  const url = new URL(request.url);
-
+export async function route(url: URL, request: Request) {
+  const pathname = url.pathname;
   switch (pathname) {
     case "/favicon.ico":
       return StaticFileResponse.serve("favicon.ico");
@@ -27,6 +31,8 @@ export async function route(pathname: string, request: Request) {
       return new HtmlResponse(IndexView, { title: "Hash" });
     case "/codec":
       return new HtmlResponse(IndexView, { title: "Codec" });
+    case "/compress":
+      return new HtmlResponse(CompressView, { title: "Compress/Decompress" });
     case "/design":
       return new HtmlResponse(IndexView, { title: "Design" });
     case "/preview":

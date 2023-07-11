@@ -95,6 +95,11 @@ export const PreviewView = `
   ${REACT}
   <script>{{code}}</script>
 `;
+export const CompressView = `
+  <script src="${STATIC_URL_PREFIX}index.${ext}" type="module"></script>
+  
+  ${LZUTF8}
+`;
 export const IframeView = `
 `;
 

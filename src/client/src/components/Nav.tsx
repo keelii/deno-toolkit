@@ -8,6 +8,7 @@ const navs: NavType[] = [
   NavType.Diff,
   NavType.Hash,
   NavType.Codec,
+  NavType.Compress,
   NavType.Playground,
 ];
 

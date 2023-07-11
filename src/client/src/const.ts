@@ -7,6 +7,7 @@ export const enum NavType {
   Hash = "hash",
   Design = "design",
   Codec = "codec",
+  Compress = "compress",
   Playground = "playground",
 }
 
