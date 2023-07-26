@@ -96,8 +96,10 @@ export default function Playground() {
     });
   });
 
+  const empty = window.__LIVE_CODE__ || url.pathname === "/livecode"
+
   return (
-    <Layout empty={url.pathname === "/livecode"}>
+    <Layout empty={empty}>
       <div className="flex h-screen">
         <div id="one" className="w-1/2 relative">
           <Editor

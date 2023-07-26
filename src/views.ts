@@ -85,6 +85,7 @@ export const HashView = `
   <script src="${STATIC_URL_PREFIX}hash.${ext}" type="module"></script>
 `;
 export const PlaygroundView = `
+  {{livecode}}
   <script src="${STATIC_URL_PREFIX}index.${ext}" type="module"></script>
   
   ${LZUTF8}

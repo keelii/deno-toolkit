@@ -47,6 +47,7 @@ export async function route(url: URL, request: Request) {
     case "/livecode":
       return new HtmlResponse(PlaygroundView, {
         title: "Live Code",
+        livecode: `<script>window.__LIVE_CODE__=true</script>`,
       });
     case "/api/format":
       return ApiResponse.json(await handleFormat(request));
