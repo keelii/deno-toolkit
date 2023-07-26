@@ -18,6 +18,7 @@ export function App() {
     { path: "/" + NavType.Codec, component: Codec },
     { path: "/" + NavType.Compress, component: Compress },
     { path: "/" + NavType.Playground, component: Playground },
+    { path: "/" + NavType.LiveCode, component: Playground },
   ]);
 
   return <Routes />;

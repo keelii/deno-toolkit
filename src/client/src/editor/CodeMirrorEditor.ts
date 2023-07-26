@@ -237,7 +237,9 @@ export class CodeMirrorEditor extends EventEmitter {
 
   setContent(text: string) {
     this.view.dispatch({
+      selection: { anchor: 1, head: 1 },
       changes: { from: 0, to: this.view.state.doc.length, insert: text },
+      // effect:     EditorView.scrollIntoView()
     });
   }
 }

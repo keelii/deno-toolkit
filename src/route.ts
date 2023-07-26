@@ -44,6 +44,10 @@ export async function route(url: URL, request: Request) {
       return new HtmlResponse(PlaygroundView, {
         title: "Playground",
       });
+    case "/livecode":
+      return new HtmlResponse(PlaygroundView, {
+        title: "Live Code",
+      });
     case "/api/format":
       return ApiResponse.json(await handleFormat(request));
     case "/api/diff":

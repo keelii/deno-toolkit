@@ -27,6 +27,7 @@ function copyToClipboard(text) {
 
 export default function Playground() {
   const [code, setCode] = createSignal(CODE_TEMPLATE);
+  const url = new URL(location.href)
 
   let iframe;
   let inputBuffer = code();
@@ -96,7 +97,7 @@ export default function Playground() {
   });
 
   return (
-    <Layout>
+    <Layout empty={url.pathname === "/livecode"}>
       <div className="flex h-screen">
         <div id="one" className="w-1/2 relative">
           <Editor
@@ -122,7 +123,7 @@ export default function Playground() {
             size="xs"
             className="absolute top-1 right-12 opacity-70 z-10"
             onClick={() => {
-              const url = window.__SITE_ROOT__ + "preview?code=" +
+              const url = location.origin + "/preview?code=" +
                 encodeURIComponent(compressText(inputBuffer));
               const yes = window.prompt(
                 "按确认将复制下面的 URL 并在新页面打开：",

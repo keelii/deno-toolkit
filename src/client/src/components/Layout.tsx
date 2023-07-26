@@ -1,7 +1,13 @@
 import type { ParentComponent } from "solid-js";
 import { Nav } from "./Nav.tsx";
 
-export const Layout: ParentComponent = (props) => {
+interface LayoutProps {
+  empty: boolean
+}
+export const Layout: ParentComponent = (props: LayoutProps) => {
+  if (props.empty) {
+    return <>{props.children}</>
+  }
   return (
     <div className="flex">
       <nav id="nav" className="w-48 h-screen overflow-y-auto">
