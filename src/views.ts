@@ -1,4 +1,4 @@
-import { IS_DEV, PORT, SITE_ROOT } from "./config/server.ts";
+import { IS_DEV, PORT, SERVICE_URL, SITE_ROOT } from "./config/server.ts";
 import { CHARSET, HTML_LANG } from "./config/client.ts";
 
 export const REACT = `
@@ -33,6 +33,8 @@ export const Layout = `<!DOCTYPE html>
   <script>
     window.__IS_DEV__ = ${IS_DEV}
     window.__SITE_ROOT__ = ${`"${SITE_ROOT}"`}
+    window.__SERVICE_URL__ = ${`"${SERVICE_URL}"`}
+    {{inlineGlobal}}
   </script>
   ${IS_DEV ? '' : '<link rel="stylesheet" href="static/index.css" />'}
   {{headScript}}
@@ -68,6 +70,8 @@ const DefaultData = {
   body: "",
   headScript: "",
   bodyScript: "",
+  inlineGlobal: "",
+  livecode: "",
 };
 const STATIC_URL_PREFIX = IS_DEV ? "http://localhost:3000/src/" : "static/";
 const ext = IS_DEV ? "tsx" : "js";
@@ -84,8 +88,14 @@ export const DiffView = `
 export const HashView = `
   <script src="${STATIC_URL_PREFIX}hash.${ext}" type="module"></script>
 `;
+export const LiveCodeView = `
+  <script src="${STATIC_URL_PREFIX}live-code.${ext}" type="module"></script>
+  
+  ${LZUTF8}
+
+  ${REACT}
+`;
 export const PlaygroundView = `
-  {{livecode}}
   <script src="${STATIC_URL_PREFIX}index.${ext}" type="module"></script>
   
   ${LZUTF8}

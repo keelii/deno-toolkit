@@ -96,7 +96,7 @@ export default function Playground() {
     });
   });
 
-  const empty = window.__LIVE_CODE__ || url.pathname === "/livecode"
+  const empty = window.__LIVE_CODE__
 
   return (
     <Layout empty={empty}>

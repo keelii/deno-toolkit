@@ -8,6 +8,7 @@ import {
 import {
   CompressView,
   IndexView,
+  LiveCodeView,
   PlaygroundView,
   PreviewView,
 } from "./views.ts";
@@ -45,9 +46,10 @@ export async function route(url: URL, request: Request) {
         title: "Playground",
       });
     case "/livecode":
-      return new HtmlResponse(PlaygroundView, {
+      return new HtmlResponse(LiveCodeView, {
         title: "Live Code",
-        livecode: `<script>window.__LIVE_CODE__=true</script>`,
+        inlineGlobal: "window.__LIVE_CODE__ = true",
+        // livecode: `<script></script>`,
       });
     case "/api/format":
       return ApiResponse.json(await handleFormat(request));

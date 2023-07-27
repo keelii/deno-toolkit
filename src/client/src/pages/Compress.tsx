@@ -13,6 +13,9 @@ const CompressTypes = [
   { value: CompressType.Brotli, label: "Brotli" },
 ];
 
+function compressText(str) { return LZUTF8.compress(str, {outputEncoding: "Base64"}) }
+function decompressText(str) { return LZUTF8.decompress(str, {inputEncoding: "Base64"}) }
+
 function lzutf8Compress(str: string) {
   return window.compressText(str);
 }

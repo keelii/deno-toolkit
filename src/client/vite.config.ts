@@ -37,7 +37,8 @@ export default defineConfig({
     assetsDir: "",
     rollupOptions: {
       input: {
-        index: resolve(__dirname, "index.html"),
+        "index": resolve(__dirname, "index.html"),
+        "live-code": resolve(__dirname, "live-code.html"),
       },
       output: {
         entryFileNames: `[name].js`,

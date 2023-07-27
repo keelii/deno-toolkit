@@ -3,6 +3,7 @@ import {
   ENV,
   ESBUILD_BINARY,
   PORT,
+  SERVICE_URL,
   SITE_ROOT,
   STATIC_DIR,
 } from "./config/server.ts";
@@ -21,6 +22,7 @@ await serve(handler, {
     console.log("- STATIC_DIR:", STATIC_DIR);
     console.log("- ESBUILD_BINARY: ", ESBUILD_BINARY);
     console.log("- SITE_ROOT: ", SITE_ROOT);
+    console.log("- SERVICE_URL: ", SERVICE_URL);
     console.log(`------------------------------------------`);
   },
 });
