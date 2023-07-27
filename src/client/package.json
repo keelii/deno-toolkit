@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && rm ../static/index.html && mv ../static/live-code.html ../static/index.html",
     "serve": "vite preview"
   },
   "license": "MIT",

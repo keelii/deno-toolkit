@@ -2,11 +2,11 @@ import type { ParentComponent } from "solid-js";
 import { Nav } from "./Nav.tsx";
 
 interface LayoutProps {
-  empty: boolean
+  empty: boolean;
 }
 export const Layout: ParentComponent = (props: LayoutProps) => {
   if (props.empty) {
-    return <>{props.children}</>
+    return <>{props.children}</>;
   }
   return (
     <div className="flex">

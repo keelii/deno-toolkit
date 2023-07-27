@@ -9,4 +9,5 @@ export const SERVICE_URL = Deno.env.get("SERVICE_URL") ||
   "http://localhost:4000/api/";
 export const ENV = Deno.env.get("DENO_ENV") || "prd";
 export const IS_DEV = ENV === "dev";
-export const CORS_ALLOW_ORIGIN = "*";
+export const CORS_ALLOW_ORIGIN = Deno.env.get("CORS_ALLOW_ORIGIN") ||
+  "https://live-code.io";

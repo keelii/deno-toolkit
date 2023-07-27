@@ -5,9 +5,11 @@ import { CORS_ALLOW_ORIGIN, IS_DEV, STATIC_DIR } from "./config/server.ts";
 
 const BaseHeaders = IS_DEV
   ? {
-    "Access-Control-Allow-Origin": CORS_ALLOW_ORIGIN,
+    "Access-Control-Allow-Origin": "*",
   }
-  : {} as HeadersInit;
+  : {
+    "Access-Control-Allow-Origin": CORS_ALLOW_ORIGIN,
+  } as HeadersInit;
 
 export class NotFoundResponse extends Response {
   constructor() {

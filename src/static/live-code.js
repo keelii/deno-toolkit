@@ -1,1 +1,1 @@
-import{z as o,f as e,P as t,x as a}from"./index2.js";o(()=>[e(t,{}),e(a,{})],document.getElementById("root"));
+import{z as o,f as e,x as n,R as r,y as a,P as s}from"./index2.js";function u(){const t=a([{path:"/",component:s}]);return e(t,{})}o(()=>e(r,{get children(){return[e(u,{}),e(n,{})]}}),document.getElementById("root"));

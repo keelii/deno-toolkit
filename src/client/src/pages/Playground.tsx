@@ -27,7 +27,7 @@ function copyToClipboard(text) {
 
 export default function Playground() {
   const [code, setCode] = createSignal(CODE_TEMPLATE);
-  const url = new URL(location.href)
+  const url = new URL(location.href);
 
   let iframe;
   let inputBuffer = code();
@@ -96,7 +96,7 @@ export default function Playground() {
     });
   });
 
-  const empty = window.__LIVE_CODE__
+  const empty = window.__LIVE_CODE__;
 
   return (
     <Layout empty={empty}>

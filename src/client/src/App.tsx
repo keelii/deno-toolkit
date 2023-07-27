@@ -5,7 +5,7 @@ import Hash from "./pages/Hash.tsx";
 import Design from "./pages/Design.tsx";
 import Codec from "./pages/Codec.tsx";
 import Playground from "./pages/Playground.tsx";
-import Compress from "./pages/Compress.tsx"
+import Compress from "./pages/Compress.tsx";
 import { NavType } from "./const.ts";
 
 export function App() {
