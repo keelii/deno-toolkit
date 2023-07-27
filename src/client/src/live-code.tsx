@@ -3,20 +3,11 @@ import { render } from "solid-js/web";
 
 import "./index.css";
 import { ToastContainer } from "./components/Toast.tsx";
-import Playground from "./pages/Playground.tsx";
-import { Router, useRoutes } from "@solidjs/router";
-
-function App() {
-  const Routes = useRoutes([
-    { path: "/", component: Playground },
-  ]);
-
-  return <Routes />;
-}
+import { PlaygroundBody } from "./pages/Playground.tsx";
 
 render(() => (
-  <Router>
-    <App />
+  <>
+    <PlaygroundBody />
     <ToastContainer />
-  </Router>
+  </>
 ), document.getElementById("root")!);

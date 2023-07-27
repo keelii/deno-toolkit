@@ -9,7 +9,6 @@ export const enum NavType {
   Codec = "codec",
   Compress = "compress",
   Playground = "playground",
-  LiveCode = "livecode",
 }
 
 export const LanguageMap: Record<FormatExt, EditorLang> = {

@@ -41,6 +41,9 @@ export default function Editor(props: EditorProps) {
     editor.on("change", (value) => {
       local.onChange(value);
     });
+    if (window.__doc__) {
+      editor.setContent(window.__doc__);
+    }
     if (typeof local.onLoad === "function") {
       local.onLoad(editor.state.doc.toString());
     }

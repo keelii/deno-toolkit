@@ -88,13 +88,6 @@ export const DiffView = `
 export const HashView = `
   <script src="${STATIC_URL_PREFIX}hash.${ext}" type="module"></script>
 `;
-export const LiveCodeView = `
-  <script src="${STATIC_URL_PREFIX}live-code.${ext}" type="module"></script>
-  
-  ${LZUTF8}
-
-  ${REACT}
-`;
 export const PlaygroundView = `
   <script src="${STATIC_URL_PREFIX}index.${ext}" type="module"></script>
   

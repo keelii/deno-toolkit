@@ -25,8 +25,12 @@ function copyToClipboard(text) {
   document.body.removeChild(tempInput);
 }
 
-export default function Playground() {
+interface PlaygroundBodyProps {
+  path?: string;
+}
+export function PlaygroundBody(props: PlaygroundBodyProps) {
   const [code, setCode] = createSignal(CODE_TEMPLATE);
+  const pathname = props.path || "/";
   const url = new URL(location.href);
 
   let iframe;
@@ -96,59 +100,63 @@ export default function Playground() {
     });
   });
 
-  const empty = window.__LIVE_CODE__;
-
   return (
-    <Layout empty={empty}>
-      <div className="flex h-screen">
-        <div id="one" className="w-1/2 relative">
-          <Editor
-            tabSize={2}
-            editorLang={"tsx"}
-            name={"playground"}
-            doc={code()}
-            onChange={debounceChange}
-            onLoad={debounceChange}
-          />
-          <Button
-            type="secondary"
-            size="xs"
-            className="absolute top-1 right-1 opacity-70 z-10"
-            onClick={() => {
-              doFormat().catch(console.error);
-            }}
-          >
-            <Icon name="code-bracket" />
-          </Button>
-          <Button
-            type="secondary"
-            size="xs"
-            className="absolute top-1 right-12 opacity-70 z-10"
-            onClick={() => {
-              const url = location.origin + "/preview?code=" +
-                encodeURIComponent(compressText(inputBuffer));
-              const yes = window.prompt(
-                "按确认将复制下面的 URL 并在新页面打开：",
-                url,
-              );
-              if (yes) {
-                window.open(url);
-              }
-            }}
-          >
-            <Icon name="share" />
-          </Button>
-        </div>
-        <div id="two" className="w-1/2">
-          <iframe
-            ref={iframe}
-            src="about:blank"
-            className="w-full h-full"
-            frameborder="0"
-          >
-          </iframe>
-        </div>
+    <div className="flex h-screen">
+      <div id="one" className="w-1/2 relative">
+        <Editor
+          tabSize={2}
+          editorLang={"tsx"}
+          name={"playground"}
+          doc={code()}
+          onChange={debounceChange}
+          onLoad={debounceChange}
+        />
+        <Button
+          type="secondary"
+          size="xs"
+          className="absolute top-1 right-1 opacity-70 z-10"
+          onClick={() => {
+            doFormat().catch(console.error);
+          }}
+        >
+          <Icon name="code-bracket" />
+        </Button>
+        <Button
+          type="secondary"
+          size="xs"
+          className="absolute top-1 right-12 opacity-70 z-10"
+          onClick={() => {
+            const url = location.origin + pathname + "?code=" +
+              encodeURIComponent(compressText(inputBuffer));
+            const yes = window.prompt(
+              "按确认将复制下面的 URL 并在新页面打开：",
+              url,
+            );
+            if (yes) {
+              window.open(url);
+            }
+          }}
+        >
+          <Icon name="share" />
+        </Button>
       </div>
+      <div id="two" className="w-1/2">
+        <iframe
+          ref={iframe}
+          src="about:blank"
+          className="w-full h-full"
+          frameborder="0"
+        >
+        </iframe>
+      </div>
+    </div>
+  );
+}
+
+export default function Playground() {
+  return (
+    <Layout>
+      <PlaygroundBody path="/preview" />
     </Layout>
   );
 }

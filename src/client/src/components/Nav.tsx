@@ -13,7 +13,6 @@ const navs: NavType[] = [
 ];
 
 if (window.__IS_DEV__) {
-  navs.push(NavType.LiveCode);
   navs.push(NavType.Design);
 }
 
